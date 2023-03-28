@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TFLite_Image_Classification.iml" filepath="$PROJECT_DIR$/.idea/modules/TFLite_Image_Classification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>

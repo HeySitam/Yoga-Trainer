@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/yoga_btn_non_selected_state.xml" value="0.1645" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/yoga_btn_selected_state.xml" value="0.1645" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/fragment_camera.xml" value="0.22826086956521738" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/info_bottom_sheet.xml" value="0.22826086956521738" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/item_classification_result.xml" value="0.22826086956521738" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

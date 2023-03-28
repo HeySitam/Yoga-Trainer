@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542184567805",
+    "project_id": "yoga-trainer-d57d9",
+    "storage_bucket": "yoga-trainer-d57d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542184567805:android:6441e55526ada136a01f94",
+        "android_client_info": {
+          "package_name": "org.tensorflow.lite.examples.imageclassification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542184567805-97p7v6jsn0sp55er7k7qk0l45mk93ac0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCknKAbOQXbydoVIFwZgvqwNCyLRjsbApQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542184567805-97p7v6jsn0sp55er7k7qk0l45mk93ac0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
