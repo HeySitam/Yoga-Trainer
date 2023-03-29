@@ -22,5 +22,6 @@
 
     <style name="BottomSheetSpinnerItemStyle" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
         <item name="android:textSize">@dimen/bottom_sheet_text_size</item>
+        <item name="android:textColor">@color/bottom_sheet_text_color</item>
     </style>
 </resources>

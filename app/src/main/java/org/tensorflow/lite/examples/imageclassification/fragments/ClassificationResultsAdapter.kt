@@ -72,16 +72,31 @@ class ClassificationResultsAdapter :
 
         fun bind(label: String?, score: Float?) {
             with(binding) {
-                tvLabel.text = when(label){
-                    "0" -> "downdog"
-                    "1" -> "goddess"
-                    "2" -> "plank"
-                    "3" -> "tree"
-                    "4" -> "warrior2"
+                tvLabel.text = "Accuracy"
+                val labelName = when(label){
+                    "0" -> "Downdog"
+                    "1" -> "Goddess"
+                    "2" -> "Plank"
+                    "3" -> "Tree"
+                    "4" -> "Warrior II"
                     else -> label ?: NO_VALUE
                 }
-                tvScore.text = if (score != null) String.format("%.3f", score) else NO_VALUE
+                if(labelName == HomeFragment.SELECTED_YOGA_NAME) {
+                    tvScore.text =
+                        if (score != null) calculateScoreInPercentage(score) else NO_VALUE
+                } else {
+                    tvScore.text = NO_VALUE
+                }
+
             }
+        }
+
+        private fun calculateScoreInPercentage(score: Float?):String{
+            var scorePerc = "__"
+            score?.let { it ->
+                scorePerc = "${String.format("%.2f", it*100)}%"
+            }
+          return scorePerc
         }
     }
 }

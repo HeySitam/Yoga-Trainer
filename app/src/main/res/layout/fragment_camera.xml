@@ -13,39 +13,78 @@
     ~ See the License for the specific language governing permissions and
     ~ limitations under the License.
 -->
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/camera_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/txtHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_sheet_background"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Yoga Name"
+        android:textColor="@color/bottom_sheet_text_color"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/txtHeading"
         app:scaleType="fillStart" />
 
-    <include
-        android:id="@+id/bottom_sheet_layout"
-        layout="@layout/info_bottom_sheet" />
+<!--    <include-->
+<!--        android:id="@+id/bottom_sheet_layout"-->
+<!--        layout="@layout/info_bottom_sheet" />-->
+    <FrameLayout
+        android:id="@+id/flCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="@color/bottom_sheet_background"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="10dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="24sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/30"
+                android:textStyle="bold"
+                android:textColor="#1D282C"
+                android:textSize="20sp"/>
+        </LinearLayout>
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/viewLiner"
         android:layout_gravity="top"
-        android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
         android:background="@color/bottom_sheet_background"
         android:clipToPadding="true"
         android:padding="@dimen/bottom_sheet_padding"
-        app:layout_anchor="@id/bottom_sheet_layout"
-        app:layout_anchorGravity="top"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <View
+        android:id="@+id/viewLiner"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="@color/bounding_box_color"
-        app:layout_anchor="@id/recyclerview_results"
-        app:layout_anchorGravity="bottom" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:background="@color/bottom_sheet_text_color"
+        android:layout_above="@id/flCounter" />
+</RelativeLayout>

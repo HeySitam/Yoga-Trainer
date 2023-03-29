@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/camera_page_heading_background.xml" value="0.1765" />
+        <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/ic_minus.xml" value="0.1645" />
         <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/yoga_btn_non_selected_state.xml" value="0.1645" />
         <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/drawable/yoga_btn_selected_state.xml" value="0.1645" />
         <entry key="..\:/Final Year Project/examples-master/lite/examples/image_classification/android/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
