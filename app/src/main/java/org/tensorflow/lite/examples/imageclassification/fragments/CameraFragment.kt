@@ -20,17 +20,12 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
-import android.widget.AdapterView
 import android.widget.Toast
-import androidx.camera.core.AspectRatio
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Camera
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -40,8 +35,11 @@ import org.tensorflow.lite.examples.imageclassification.ImageClassifierHelper
 import org.tensorflow.lite.examples.imageclassification.R
 import org.tensorflow.lite.examples.imageclassification.databinding.FragmentCameraBinding
 import org.tensorflow.lite.task.vision.classifier.Classifications
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
@@ -91,8 +89,25 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         savedInstanceState: Bundle?
     ): View {
         _fragmentCameraBinding = FragmentCameraBinding.inflate(inflater, container, false)
+        initTimer(50000,1000)
 
         return fragmentCameraBinding.root
+    }
+
+    private fun initTimer(timeInMillis: Long, intervalInMillis: Long) {
+        object : CountDownTimer(timeInMillis, intervalInMillis) {
+            override fun onTick(millisUntilFinished: Long) {
+                // Used for formatting digit to be in 2 digits only
+                val f: NumberFormat = DecimalFormat("00")
+                val sec = millisUntilFinished / intervalInMillis % 60
+                fragmentCameraBinding.txtCounter.text = f.format(sec)
+            }
+
+            // When the task is over it will print 00:00:00 there
+            override fun onFinish() {
+                fragmentCameraBinding.txtCounter.text = "Time Up!"
+            }
+        }.start()
     }
 
     @SuppressLint("MissingPermission")

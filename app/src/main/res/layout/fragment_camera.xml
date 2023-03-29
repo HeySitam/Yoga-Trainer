@@ -38,36 +38,27 @@
         android:layout_below="@id/txtHeading"
         app:scaleType="fillStart" />
 
-<!--    <include-->
-<!--        android:id="@+id/bottom_sheet_layout"-->
-<!--        layout="@layout/info_bottom_sheet" />-->
+    <!--    <include-->
+    <!--        android:id="@+id/bottom_sheet_layout"-->
+    <!--        layout="@layout/info_bottom_sheet" />-->
     <FrameLayout
         android:id="@+id/flCounter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:background="@color/bottom_sheet_background"
         android:layout_alignParentBottom="true"
-        android:paddingTop="10dp">
-        <LinearLayout
+        android:background="@color/bottom_sheet_background"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/txtCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="28"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:textSize="24sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/30"
-                android:textStyle="bold"
-                android:textColor="#1D282C"
-                android:textSize="20sp"/>
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:text="28"
+            android:textColor="#ffffff"
+            android:textSize="36sp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -85,6 +76,6 @@
         android:id="@+id/viewLiner"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="@color/bottom_sheet_text_color"
-        android:layout_above="@id/flCounter" />
+        android:layout_above="@id/flCounter"
+        android:background="@color/bottom_sheet_text_color" />
 </RelativeLayout>
