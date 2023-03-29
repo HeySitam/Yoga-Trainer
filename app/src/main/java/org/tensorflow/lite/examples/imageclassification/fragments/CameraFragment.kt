@@ -65,8 +65,6 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
-    private val accuracyCheckInterval:Long = 2000;
-    private lateinit var handler: Handler
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
     override fun onResume() {
