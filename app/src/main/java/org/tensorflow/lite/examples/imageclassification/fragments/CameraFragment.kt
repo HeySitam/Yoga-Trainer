@@ -20,33 +20,36 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.tensorflow.lite.examples.imageclassification.ImageClassifierHelper
 import org.tensorflow.lite.examples.imageclassification.R
 import org.tensorflow.lite.examples.imageclassification.databinding.FragmentCameraBinding
+import org.tensorflow.lite.examples.imageclassification.viewmodels.YogaViewModel
 import org.tensorflow.lite.task.vision.classifier.Classifications
-import java.text.DecimalFormat
-import java.text.NumberFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
 class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
-
     companion object {
         private const val TAG = "Image Classifier"
     }
 
+    private val viewModel:YogaViewModel by activityViewModels()
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
     private val fragmentCameraBinding
         get() = _fragmentCameraBinding!!
@@ -62,10 +65,10 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
-
+    private val accuracyCheckInterval:Long = 2000;
+    private lateinit var handler: Handler
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
-
     override fun onResume() {
         super.onResume()
 
@@ -89,25 +92,8 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         savedInstanceState: Bundle?
     ): View {
         _fragmentCameraBinding = FragmentCameraBinding.inflate(inflater, container, false)
-        initTimer(50000,1000)
 
         return fragmentCameraBinding.root
-    }
-
-    private fun initTimer(timeInMillis: Long, intervalInMillis: Long) {
-        object : CountDownTimer(timeInMillis, intervalInMillis) {
-            override fun onTick(millisUntilFinished: Long) {
-                // Used for formatting digit to be in 2 digits only
-                val f: NumberFormat = DecimalFormat("00")
-                val sec = millisUntilFinished / intervalInMillis % 60
-                fragmentCameraBinding.txtCounter.text = f.format(sec)
-            }
-
-            // When the task is over it will print 00:00:00 there
-            override fun onFinish() {
-                fragmentCameraBinding.txtCounter.text = "Time Up!"
-            }
-        }.start()
     }
 
     @SuppressLint("MissingPermission")
@@ -127,9 +113,21 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         fragmentCameraBinding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
+            viewModel.initTimer(50000,1000)
+            viewModel.countDownTimer.observe(viewLifecycleOwner) { countDown ->
+                fragmentCameraBinding.txtCounter.text = countDown
+               val adapter = fragmentCameraBinding.recyclerviewResults.adapter
+                adapter?.let { newAdapter ->
+                    if(newAdapter.itemCount > 0){
+                        val accuracy = fragmentCameraBinding.recyclerviewResults[0].findViewById<TextView>(R.id.tvScore).text.toString()
+                        if(accuracy != "--")
+                          viewModel.accuracyList.add(accuracy.substring(0,4).toFloat())
+                    }
+                }
+            }
         }
-
         initCameraPageHeader()
+
         // Attach listeners to UI control widgets
        // initBottomSheetControls()
     }
@@ -363,6 +361,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     ) {
         activity?.runOnUiThread {
             // Show result on bottom sheet
+
             classificationResultsAdapter.updateResults(results)
             classificationResultsAdapter.notifyDataSetChanged()
 //            fragmentCameraBinding.bottomSheetLayout.inferenceTimeVal.text =
