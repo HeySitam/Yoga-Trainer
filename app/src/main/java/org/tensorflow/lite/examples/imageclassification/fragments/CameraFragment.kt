@@ -17,6 +17,8 @@
 package org.tensorflow.lite.examples.imageclassification.fragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -69,6 +71,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     private lateinit var handler: Handler
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var alertDialog: AlertDialog.Builder
     override fun onResume() {
         super.onResume()
 
@@ -113,7 +116,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         fragmentCameraBinding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
-            viewModel.initTimer(50000,1000)
+            viewModel.initTimer(20000,1000)
             viewModel.countDownTimer.observe(viewLifecycleOwner) { countDown ->
                 fragmentCameraBinding.txtCounter.text = countDown
                val adapter = fragmentCameraBinding.recyclerviewResults.adapter
@@ -124,12 +127,28 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
                           viewModel.accuracyList.add(accuracy.substring(0,4).toFloat())
                     }
                 }
+                if(countDown == "00"){
+                    initAlertDialog()
+                    alertDialog.show()
+                }
             }
         }
         initCameraPageHeader()
 
         // Attach listeners to UI control widgets
        // initBottomSheetControls()
+    }
+
+    private fun initAlertDialog() {
+        alertDialog = AlertDialog.Builder(requireContext())
+        with(alertDialog){
+            setTitle("Result!")
+            setMessage("Your average accuracy : ${String.format("%.2f", viewModel.calculateAverageAccuracy())}%")
+            setCancelable(false)
+            setPositiveButton("Close") { dialog, _ ->
+                dialog.cancel()
+            }
+        }
     }
 
     private fun initCameraPageHeader() {
