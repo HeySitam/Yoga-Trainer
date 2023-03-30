@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.tensorflow.lite.examples.imageclassification.databinding.ItemClassificationResultBinding
+import org.tensorflow.lite.examples.imageclassification.utils.Utils.Companion.SELECTED_YOGA_NAME
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import kotlin.math.min
@@ -81,7 +82,7 @@ class ClassificationResultsAdapter :
                     "4" -> "Warrior II"
                     else -> label ?: NO_VALUE
                 }
-                if(labelName == HomeFragment.SELECTED_YOGA_NAME) {
+                if(labelName == SELECTED_YOGA_NAME) {
                     tvScore.text =
                         if (score != null) calculateScoreInPercentage(score) else NO_VALUE
                 } else {

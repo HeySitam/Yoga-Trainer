@@ -19,10 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
         android:text="Yoga Trainer"
         android:textColor="@color/bottom_sheet_text_color"
-        android:textSize="32sp" />
+        android:textSize="36sp" />
 
     <HorizontalScrollView
         android:id="@+id/hsvButtons"
@@ -129,7 +130,7 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:scaleType="centerCrop"
-          android:src="@drawable/dummy_yoga_pose" />
+          android:src="@drawable/downdog_pose" />
 
       <ImageView
           android:id="@+id/imgPlayIcon"
@@ -157,5 +158,6 @@
         android:elevation="2dp"
         android:focusable="true"
         android:src="@drawable/camera_fab" />
+
   </RelativeLayout>
 </layout>

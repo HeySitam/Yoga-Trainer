@@ -3,31 +3,29 @@ package org.tensorflow.lite.examples.imageclassification.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import org.tensorflow.lite.examples.imageclassification.R
 import org.tensorflow.lite.examples.imageclassification.databinding.FragmentHomeBinding
+import org.tensorflow.lite.examples.imageclassification.utils.Utils.Companion.SELECTED_YOGA_NAME
 import org.tensorflow.lite.examples.imageclassification.utils.YogaPose
 import org.tensorflow.lite.examples.imageclassification.utils.YogaVideoUrl
 
 class HomeFragment : Fragment(), View.OnClickListener {
     lateinit var binding: FragmentHomeBinding
-    private var yogaPose: YogaPose = YogaPose.DOWNDOG
-    companion object{
-        var SELECTED_YOGA_NAME = "Downdog"
-    }
+    private val yogaPose: MutableLiveData<YogaPose> = MutableLiveData(YogaPose.DOWNDOG)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater ,R.layout.fragment_home, container, false)
+        autoClickOnYogaPoseSetup()
         return binding.root
     }
 
@@ -40,6 +38,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.txtWarrior2.setOnClickListener(this)
         binding.imgPlayIcon.setOnClickListener(this)
         binding.imgCameraFab.setOnClickListener(this)
+        yogaPose.observe(viewLifecycleOwner){ pose ->
+            when(pose){
+                YogaPose.DOWNDOG -> binding.imgYogaPosePic.setImageResource(R.drawable.downdog_pose)
+                YogaPose.GODDESS -> binding.imgYogaPosePic.setImageResource(R.drawable.goddess_pose)
+                YogaPose.PLANK -> binding.imgYogaPosePic.setImageResource(R.drawable.plank_pose)
+                YogaPose.TREE -> binding.imgYogaPosePic.setImageResource(R.drawable.tree_pose)
+                YogaPose.WARRIOR2 -> binding.imgYogaPosePic.setImageResource(R.drawable.warrio_ii_pose)
+            }
+
+        }
     }
 
     override fun onClick(view: View) {
@@ -50,7 +58,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
-                yogaPose = YogaPose.DOWNDOG
+                yogaPose.value = YogaPose.DOWNDOG
                 SELECTED_YOGA_NAME = "Downdog"
             }
             R.id.txtGoddess -> {
@@ -59,7 +67,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
-                yogaPose = YogaPose.GODDESS
+                yogaPose.value = YogaPose.GODDESS
                 SELECTED_YOGA_NAME = "Goddess"
             }
             R.id.txtPlank -> {
@@ -68,7 +76,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_selected_state)
                 binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
-                yogaPose = YogaPose.PLANK
+                yogaPose.value = YogaPose.PLANK
                 SELECTED_YOGA_NAME = "Plank"
             }
             R.id.txtTree -> {
@@ -77,7 +85,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_selected_state)
                 binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
-                yogaPose = YogaPose.TREE
+                yogaPose.value = YogaPose.TREE
                 SELECTED_YOGA_NAME = "Tree"
             }
             R.id.txtWarrior2 -> {
@@ -86,11 +94,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
                 binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_selected_state)
-                yogaPose = YogaPose.WARRIOR2
+                yogaPose.value = YogaPose.WARRIOR2
                 SELECTED_YOGA_NAME = "Warrior II"
             }
             R.id.imgPlayIcon -> {
-               when(yogaPose){
+               when(yogaPose.value){
                    YogaPose.DOWNDOG -> openYoutube(YogaVideoUrl.downdog)
                    YogaPose.GODDESS -> openYoutube(YogaVideoUrl.goddess)
                    YogaPose.PLANK -> openYoutube(YogaVideoUrl.plank)
@@ -100,6 +108,51 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
             R.id.imgCameraFab -> {
                 findNavController().navigate(R.id.action_homeFragment_to_permissions_fragment)
+            }
+        }
+    }
+
+    private fun autoClickOnYogaPoseSetup(){
+        when(SELECTED_YOGA_NAME){
+            "Downdog" -> {
+                binding.txtDowndog.setBackgroundResource(R.drawable.yoga_btn_selected_state)
+                binding.txtGoddess.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                yogaPose.value = YogaPose.DOWNDOG
+            }
+            "Goddess" -> {
+                binding.txtDowndog.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtGoddess.setBackgroundResource(R.drawable.yoga_btn_selected_state)
+                binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                yogaPose.value = YogaPose.GODDESS
+            }
+            "Plank" -> {
+                binding.txtDowndog.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtGoddess.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_selected_state)
+                binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                yogaPose.value = YogaPose.PLANK
+            }
+            "Tree" -> {
+                binding.txtDowndog.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtGoddess.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_selected_state)
+                binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                yogaPose.value = YogaPose.TREE
+            }
+            "Warrior II" -> {
+                binding.txtDowndog.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtGoddess.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtPlank.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtTree.setBackgroundResource(R.drawable.yoga_btn_non_selected_state)
+                binding.txtWarrior2.setBackgroundResource(R.drawable.yoga_btn_selected_state)
+                yogaPose.value = YogaPose.WARRIOR2
             }
         }
     }

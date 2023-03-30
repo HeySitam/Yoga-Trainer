@@ -1,0 +1,31 @@
+package org.tensorflow.lite.examples.imageclassification.fragments
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import org.tensorflow.lite.examples.imageclassification.R
+import org.tensorflow.lite.examples.imageclassification.databinding.FragmentStarterPageBinding
+
+class StarterPageFragment : Fragment() {
+  lateinit var binding: FragmentStarterPageBinding
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    // Inflate the layout for this fragment
+    binding = DataBindingUtil.inflate(inflater,R.layout.fragment_starter_page, container, false)
+    return binding.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    binding.btnStart.setOnClickListener {
+      findNavController().navigate(R.id.action_starterPageFragment_to_home_fragment)
+    }
+
+  }
+}

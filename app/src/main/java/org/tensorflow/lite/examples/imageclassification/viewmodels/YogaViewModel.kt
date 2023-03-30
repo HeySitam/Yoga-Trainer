@@ -12,6 +12,7 @@ class YogaViewModel: ViewModel() {
     private val _countDownTimer: MutableLiveData<String> = MutableLiveData()
     val countDownTimer: LiveData<String> = _countDownTimer
     val accuracyList: MutableList<Float?> = mutableListOf()
+    var isTimerStop = false
 
     fun initTimer(timeInMillis: Long, intervalInMillis: Long) {
         object : CountDownTimer(timeInMillis, intervalInMillis) {
@@ -26,6 +27,7 @@ class YogaViewModel: ViewModel() {
             override fun onFinish() {
                 _countDownTimer.value  = "Time Up!"
                 Log.d("chkList", calculateAverageAccuracy().toString())
+                isTimerStop = true
             }
         }.start()
     }

@@ -4,9 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TFLite_Image_Classification.iml" filepath="$PROJECT_DIR$/.idea/modules/TFLite_Image_Classification.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFLite_Image_Classification.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.TFLite_Image_Classification.app.unitTest.iml" />
     </modules>
   </component>
 </project>

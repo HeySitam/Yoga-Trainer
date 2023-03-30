@@ -3,8 +3,8 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d07ae9c6fbbfe5b56ad3e2af780ff350/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c98790fe55cc9f82a96450f1171ad952/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c98790fe55cc9f82a96450f1171ad952/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c98790fe55cc9f82a96450f1171ad952/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cf04ef165a2aff57c7ab519898ccb978/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cf04ef165a2aff57c7ab519898ccb978/transformed/tensorflow-lite-gpu-delegate-plugin-0.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

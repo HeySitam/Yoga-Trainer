@@ -19,6 +19,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+  <FrameLayout
+      android:id="@+id/flHeading"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/txtHeading"
         android:layout_width="match_parent"
@@ -31,51 +36,62 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/view_finder"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imgIconBack"
+        android:layout_width="50dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_height="match_parent"
-        android:layout_below="@id/txtHeading"
-        app:scaleType="fillStart" />
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back" />
+  </FrameLayout>
 
-    <!--    <include-->
-    <!--        android:id="@+id/bottom_sheet_layout"-->
-    <!--        layout="@layout/info_bottom_sheet" />-->
-    <FrameLayout
-        android:id="@+id/flCounter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/bottom_sheet_background"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+  <androidx.camera.view.PreviewView
+      android:id="@+id/view_finder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/flHeading"
+      app:scaleType="fillStart" />
 
-        <TextView
-            android:id="@+id/txtCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="28"
-            android:textColor="#ffffff"
-            android:textSize="36sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+  <!--    <include-->
+  <!--        android:id="@+id/bottom_sheet_layout"-->
+  <!--        layout="@layout/info_bottom_sheet" />-->
+  <FrameLayout
+      android:id="@+id/flCounter"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@color/bottom_sheet_background"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_results"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/viewLiner"
-        android:layout_gravity="top"
-        android:background="@color/bottom_sheet_background"
-        android:clipToPadding="true"
-        android:padding="@dimen/bottom_sheet_padding"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
-    <View
-        android:id="@+id/viewLiner"
+    <TextView
+        android:id="@+id/txtCounter"
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_above="@id/flCounter"
-        android:background="@color/bottom_sheet_text_color" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="28"
+        android:textColor="#ffffff"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+  </FrameLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerview_results"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/viewLiner"
+      android:layout_gravity="top"
+      android:background="@color/bottom_sheet_background"
+      android:clipToPadding="true"
+      android:padding="@dimen/bottom_sheet_padding"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+  <View
+      android:id="@+id/viewLiner"
+      android:layout_width="wrap_content"
+      android:layout_height="1dp"
+      android:layout_above="@id/flCounter"
+      android:background="@color/bottom_sheet_text_color" />
 </RelativeLayout>

@@ -29,17 +29,21 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.tensorflow.lite.examples.imageclassification.ImageClassifierHelper
 import org.tensorflow.lite.examples.imageclassification.R
 import org.tensorflow.lite.examples.imageclassification.databinding.FragmentCameraBinding
+import org.tensorflow.lite.examples.imageclassification.utils.Utils.Companion.SELECTED_YOGA_NAME
 import org.tensorflow.lite.examples.imageclassification.viewmodels.YogaViewModel
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.util.concurrent.ExecutorService
@@ -51,7 +55,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         private const val TAG = "Image Classifier"
     }
 
-    private val viewModel:YogaViewModel by activityViewModels()
+    private val viewModel:YogaViewModel by viewModels()
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
     private val fragmentCameraBinding
         get() = _fragmentCameraBinding!!
@@ -114,12 +118,12 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         fragmentCameraBinding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
-            viewModel.initTimer(20000,1000)
+            viewModel.initTimer(50000,1000)
             viewModel.countDownTimer.observe(viewLifecycleOwner) { countDown ->
                 fragmentCameraBinding.txtCounter.text = countDown
                val adapter = fragmentCameraBinding.recyclerviewResults.adapter
                 adapter?.let { newAdapter ->
-                    if(newAdapter.itemCount > 0){
+                    if(newAdapter.itemCount > 0 && !viewModel.isTimerStop){
                         val accuracy = fragmentCameraBinding.recyclerviewResults[0].findViewById<TextView>(R.id.tvScore).text.toString()
                         if(accuracy != "--")
                           viewModel.accuracyList.add(accuracy.substring(0,4).toFloat())
@@ -132,7 +136,10 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
             }
         }
         initCameraPageHeader()
-
+        //onBackPressed()
+        fragmentCameraBinding.imgIconBack.setOnClickListener {
+            findNavController().navigate(R.id.action_camera_fragment_to_homeFragment)
+        }
         // Attach listeners to UI control widgets
        // initBottomSheetControls()
     }
@@ -144,13 +151,14 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
             setMessage("Your average accuracy : ${String.format("%.2f", viewModel.calculateAverageAccuracy())}%")
             setCancelable(false)
             setPositiveButton("Close") { dialog, _ ->
+                findNavController().navigate(R.id.action_camera_fragment_to_homeFragment)
                 dialog.cancel()
             }
         }
     }
 
     private fun initCameraPageHeader() {
-        fragmentCameraBinding.txtHeading.text = HomeFragment.SELECTED_YOGA_NAME
+        fragmentCameraBinding.txtHeading.text = SELECTED_YOGA_NAME
     }
 
     // Initialize CameraX, and prepare to bind the camera use cases
@@ -272,6 +280,7 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 //        // delegate needs to be initialized on the thread using it when applicable
 //        imageClassifierHelper.clearImageClassifier()
 //    }
+
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
